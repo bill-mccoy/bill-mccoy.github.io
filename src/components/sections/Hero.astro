@@ -1,0 +1,98 @@
+---
+import { AUTHOR, AUTHOR_ROLE, CTA_PRIMARY, CTA_PRIMARY_HREF, CTA_SECONDARY, CTA_SECONDARY_HREF } from "../../data/site";
+
+const stack = [
+  "Python",
+  "Blender",
+  "AutoCAD",
+  "Revit",
+  "krpano",
+  "ChatGPT API",
+  "Discord.js / py",
+  "MySQL",
+  "SolidWorks",
+];
+---
+
+<section id="inicio" class="relative overflow-hidden">
+  <div
+    class="bg-grid pointer-events-none absolute inset-0 -z-10"
+    aria-hidden="true"
+  ></div>
+
+  <div
+    class="mx-auto flex w-full max-w-6xl flex-col items-center px-5 pb-20 pt-24 text-center sm:px-8 sm:pt-32 lg:pb-28 lg:pt-40"
+  >
+    <p
+      class="animate-fade-up mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-surface/60 px-4 py-1.5 font-mono text-xs text-glow"
+    >
+      <span class="size-1.5 rounded-full bg-glow" aria-hidden="true"></span>
+      // dev × 3D × mechanical engineering
+    </p>
+
+    <h1
+      class="animate-fade-up max-w-3xl font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-6xl"
+      style="animation-delay: 80ms"
+    >
+      {AUTHOR}
+      <span class="mt-2 block font-medium text-mute">Del plano al producto.</span>
+      <span class="text-gradient block font-medium">Del código a la escena.</span>
+    </h1>
+
+    <p
+      class="animate-fade-up mt-8 max-w-xl text-base leading-relaxed text-mute sm:text-lg"
+      style="animation-delay: 160ms"
+    >
+      {AUTHOR_ROLE}. Combino desarrollo de software, modelado 3D y diseño de
+      estructuras para construir aplicaciones, tours virtuales y máquinas que
+      funcionan en el mundo real.
+    </p>
+
+    <div
+      class="animate-fade-up mt-10 flex flex-col items-center gap-3 sm:flex-row"
+      style="animation-delay: 240ms"
+    >
+      <a
+        href={CTA_PRIMARY_HREF}
+        class="inline-flex items-center gap-2 rounded-lg bg-glow px-6 py-3 text-sm font-semibold text-ink shadow-[0_0_30px_-8px_rgb(0_229_255_/_0.9)] transition-transform hover:-translate-y-0.5"
+      >
+        {CTA_PRIMARY}
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </a>
+      <a
+        href={CTA_SECONDARY_HREF}
+        class="inline-flex items-center gap-2 rounded-lg border border-line bg-surface/60 px-6 py-3 text-sm font-semibold text-soft transition-colors hover:border-glow/50 hover:text-glow"
+      >
+        {CTA_SECONDARY}
+      </a>
+    </div>
+
+    <ul
+      class="animate-fade-up mt-14 flex max-w-2xl flex-wrap items-center justify-center gap-2"
+      style="animation-delay: 320ms"
+    >
+      {
+        stack.map((tech) => (
+          <li
+            class="rounded-md border border-line-soft bg-surface/50 px-2.5 py-1 font-mono text-xs text-mute"
+          >
+            {tech}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

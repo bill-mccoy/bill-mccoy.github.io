@@ -1,0 +1,40 @@
+---
+import { socials } from "../../data/socials";
+import { AUTHOR, SITE_TITLE } from "../../data/site";
+---
+
+<footer class="border-t border-line">
+  <div
+    class="mx-auto flex w-full max-w-6xl flex-col gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between"
+  >
+    <div class="space-y-1.5">
+      <a href="/#inicio" class="font-display text-sm font-semibold tracking-tight">
+        {AUTHOR}
+      </a>
+      <p class="text-sm text-mute">
+        {SITE_TITLE}
+      </p>
+      <p class="font-mono text-xs text-faint">
+        © {new Date().getFullYear()} — construido con Astro · GitHub Pages
+      </p>
+    </div>
+
+    <ul class="flex flex-wrap items-center gap-x-6 gap-y-2">
+      {
+        socials.map((s) => (
+          <li>
+            <a
+              href={s.href}
+              target={s.href.startsWith("http") ? "_blank" : undefined}
+              rel={s.href.startsWith("http") ? "noreferrer noopener" : undefined}
+              class="group inline-flex items-baseline gap-1.5 text-sm text-mute transition-colors hover:text-glow"
+            >
+              <span class="font-mono text-xs text-faint transition-colors group-hover:text-glow/60">{s.label}</span>
+              <span>{s.handle}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>

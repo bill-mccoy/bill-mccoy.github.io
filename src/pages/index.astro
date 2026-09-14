@@ -1,0 +1,39 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/sections/Hero.astro";
+import {
+  SITE_TITLE,
+  SITE_DESCRIPTION,
+  AUTHOR_ROLE,
+} from "../data/site";
+
+const placeholderSections = [
+  { id: "about", num: "01", title: "Sobre mí", note: `${AUTHOR_ROLE}. Sección en construcción — Fase 2.` },
+  { id: "proyectos", num: "02", title: "Proyectos", note: "TerraWorks · Grupo 7Points · Despiertapp · Ingeniería Estructural — Fase 2." },
+  { id: "open-source", num: "03", title: "Open Source", note: "UniGuard y repos de GitHub — Fase 2." },
+  { id: "contacto", num: "04", title: "Contacto", note: "hola@bill-mccoy.dev — Fase 2." },
+];
+---
+
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <Hero />
+
+  {
+    placeholderSections.map((s) => (
+      <section
+        id={s.id}
+        class="mx-auto w-full max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-20"
+      >
+        <p class="mb-2 font-mono text-xs text-glow">
+          FASE 02 · SECCIÓN {s.num}
+        </p>
+        <h2 class="font-display text-2xl font-bold tracking-tight sm:text-3xl">
+          {s.title}
+        </h2>
+        <div class="mt-6 rounded-xl border border-dashed border-line bg-surface/30 p-8 text-sm text-faint">
+          {s.note}
+        </div>
+      </section>
+    ))
+  }
+</BaseLayout>

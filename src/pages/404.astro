@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404">
+  <section class="mx-auto flex w-full max-w-6xl flex-col items-center px-5 py-28 text-center sm:px-8 sm:py-40">
+    <p class="font-mono text-sm text-glow">HTTP/1.1 404 NOT FOUND</p>
+    <h1 class="mt-4 font-display text-6xl font-bold tracking-tight sm:text-8xl">
+      404
+    </h1>
+    <p class="mt-6 max-w-md text-mute">
+      Esta coordenada no existe en el plano. El modelo fue movido o nunca se
+      dibujó.
+    </p>
+    <a
+      href="/"
+      class="mt-10 inline-flex items-center gap-2 rounded-lg bg-glow px-6 py-3 text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
+    >
+      Volver al inicio
+    </a>
+  </section>
+</BaseLayout>
