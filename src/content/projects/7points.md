@@ -5,7 +5,7 @@ year: "2023 — 2025"
 role: "Diseño · Desarrollo · Construcción"
 disciplines: ["engineering", "3d"]
 tags: ["Autodesk Inventor", "FSAE", "Composites", "CAD/CAM"]
-summary: "Diseño, desarrollo y construcción de un buggy y un monoplaza para Formula Student. Del CAD al taller, pieza por pieza."
+summary: "Diseño, desarrollo y construcción de un buggy y un monoplaza para Formula SAE. Del CAD al taller, pieza por pieza."
 image: "/placeholders/7points.svg"
 featured: true
 order: 2
@@ -43,4 +43,4 @@ gallery:
     ratio: "16/9"
 ---
 
-En Grupo 7Points diseñé, desarrollé y construí dos vehículos competitivos: un buggy y un monoplaza para Formula Student. El proceso cubrió dimensionamiento estructural, modelado CAD, fabricación de composites y ensamblaje en el taller hasta la puesta en marcha.
+En Grupo 7Points diseñé, desarrollé y construí dos vehículos competitivos: un buggy y un monoplaza para Formula SAE. El proceso cubrió dimensionamiento estructural, modelado CAD, fabricación de composites y ensamblaje en el taller hasta la puesta en marcha.
