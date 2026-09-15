@@ -121,6 +121,20 @@ const ogImage = image
     header?.classList.toggle("is-scrolled", window.scrollY > 8);
 
   let ioSpy: IntersectionObserver | null = null;
+  const navEl = document.querySelector<HTMLElement>("#site-header nav");
+  const indicator = document.getElementById("nav-indicator");
+  const positionIndicator = (link: HTMLElement | null) => {
+    if (!navEl || !indicator) return;
+    if (!(link instanceof HTMLElement)) {
+      indicator.style.opacity = "0";
+      return;
+    }
+    const n = navEl.getBoundingClientRect();
+    const r = link.getBoundingClientRect();
+    indicator.style.left = `${r.left - n.left}px`;
+    indicator.style.width = `${r.width}px`;
+    indicator.style.opacity = "1";
+  };
   const enableScrollspy = () => {
     ioSpy?.disconnect();
     const links = Array.from(
@@ -136,7 +150,9 @@ const ogImage = image
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
           links.forEach((l) => l.classList.remove("nav-active"));
-          activeLink(entry.target.id)?.classList.add("nav-active");
+          const active = activeLink(entry.target.id);
+          active?.classList.add("nav-active");
+          positionIndicator(active ?? null);
         }
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
@@ -153,6 +169,10 @@ const ogImage = image
     updateProgress();
     updateHeader();
     enableScrollspy();
+    positionIndicator(
+      document.querySelector<HTMLElement>("#site-header a.nav-active") ??
+        document.querySelector<HTMLElement>("#site-header a[data-nav]"),
+    );
   };
 
   attach();
