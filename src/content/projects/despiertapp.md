@@ -1,7 +1,7 @@
 ---
 title: "Despiertapp"
 org: "Despiertapp"
-year: "2024"
+year: "2026"
 role: "Desarrollador de la aplicación"
 disciplines: ["development"]
 tags: ["Aplicación", "Privacidad", "Redacción técnica"]
