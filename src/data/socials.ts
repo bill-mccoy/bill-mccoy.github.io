@@ -12,12 +12,7 @@ export const socials: Social[] = [
   },
   {
     label: "LinkedIn",
-    handle: "in/juancortes",
-    href: "https://www.linkedin.com/",
-  },
-  {
-    label: "Correo",
-    handle: "hola@bill-mccoy.dev",
-    href: "mailto:hola@bill-mccoy.dev",
+    handle: "in/juancortesgutie",
+    href: "https://www.linkedin.com/in/juancortesgutie/",
   },
 ];

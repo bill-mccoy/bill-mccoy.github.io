@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import ProjectGallery from "../components/ui/ProjectGallery.astro";
 import { DISCIPLINES, sortDisciplines } from "../data/disciplines";
 import type { CollectionEntry } from "astro:content";
 
@@ -124,12 +123,6 @@ const disciplines = sortDisciplines(project.disciplines);
             </a>
           ))
         }
-      </div>
-    )}
-
-    {project.featured && project.gallery && project.gallery.length > 0 && (
-      <div class="reveal mt-16">
-        <ProjectGallery items={project.gallery} />
       </div>
     )}
 

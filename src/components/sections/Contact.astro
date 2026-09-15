@@ -1,7 +1,8 @@
 ---
 import SectionHeading from "../ui/SectionHeading.astro";
 import { socials } from "../../data/socials";
-import { EMAIL } from "../../data/site";
+
+const linkedin = socials.find((s) => s.label === "LinkedIn");
 ---
 
 <section id="contacto" class="mx-auto w-full max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-24">
@@ -13,12 +14,15 @@ import { EMAIL } from "../../data/site";
       description="Tengo disponibilidad para proyectos de software, visualización 3D y diseño mecánico. Si te interesa un perfil que cruza las tres cosas, escríbeme."
     />
 
-    <a
-      href={`mailto:${EMAIL}`}
-      class="group press mt-8 inline-flex items-center gap-3 rounded-lg bg-glow px-6 py-3 font-mono text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
-    >
-      {EMAIL}
-      <svg
+    {linkedin && (
+      <a
+        href={linkedin.href}
+        target="_blank"
+        rel="noreferrer noopener"
+        class="group press mt-8 inline-flex items-center gap-3 rounded-lg bg-glow px-6 py-3 font-mono text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
+      >
+        Escríbeme por LinkedIn
+        <svg
         width="16"
         height="16"
         viewBox="0 0 24 24"
@@ -33,6 +37,7 @@ import { EMAIL } from "../../data/site";
         <path d="m12 5 7 7-7 7" />
       </svg>
     </a>
+    )}
 
     <ul class="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
       {

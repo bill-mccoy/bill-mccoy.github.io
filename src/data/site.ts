@@ -5,7 +5,6 @@ export const SITE_DESCRIPTION =
 export const AUTHOR = "Juan Cortes";
 export const AUTHOR_ROLE =
   "Ingeniero mecánico · Desarrollador de software · Diseñador 3D";
-export const EMAIL = "hola@bill-mccoy.dev";
 export const CTA_PRIMARY = "Ver proyectos";
 export const CTA_PRIMARY_HREF = "/#proyectos";
 export const CTA_SECONDARY = "Descargar CV";
