@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import ProjectLayout from "../../layouts/ProjectLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = (await getCollection("projects")).sort(
+    (a, b) => a.data.order - b.data.order,
+  );
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { data } = project;
+
+const allProjects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+const index = allProjects.findIndex((p) => p.id === project.id);
+const prev = index > 0 ? allProjects[index - 1] : null;
+const next = index >= 0 && index < allProjects.length - 1 ? allProjects[index + 1] : null;
+---
+
+<ProjectLayout
+  title={data.title}
+  description={data.summary}
+  image={data.image}
+  slug={project.slug}
+  project={data}
+  prev={prev ? { title: prev.data.title, href: `/proyectos/${prev.slug}` } : null}
+  next={next ? { title: next.data.title, href: `/proyectos/${next.slug}` } : null}
+>
+  <Content />
+</ProjectLayout>

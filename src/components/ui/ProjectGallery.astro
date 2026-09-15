@@ -1,0 +1,144 @@
+---
+import type { CollectionEntry } from "astro:content";
+import VirtualTourEmbed from "./VirtualTourEmbed.astro";
+import VideoEmbed from "./VideoEmbed.astro";
+import Lightbox from "./Lightbox.astro";
+
+type GalleryItem = CollectionEntry<"projects">["data"]["gallery"];
+type Item = NonNullable<GalleryItem>[number];
+
+interface Props {
+  items: Item[];
+}
+
+const { items } = Astro.props;
+
+const groups = [...new Set(items.map((i) => i.group))];
+const byGroup = (group: string) => items.filter((i) => i.group === group);
+const multi = groups.length > 1;
+---
+
+<section id="galeria" class="scroll-mt-24">
+  <div class="reveal flex flex-wrap items-end justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <span class="font-mono text-xs tracking-[0.2em] text-glow">GALERÍA</span>
+      <span aria-hidden="true" class="h-px w-16 bg-line"></span>
+    </div>
+    {multi && (
+      <div
+        class="flex flex-wrap items-center gap-2"
+        role="tablist"
+        aria-label="Secciones de la galería"
+      >
+        {
+          groups.map((g, i) => (
+            <button
+              type="button"
+              role="tab"
+              aria-selected={i === 0 ? "true" : "false"}
+              data-tab={g}
+              class:list={["filter-btn", i === 0 && "is-active"]}
+            >
+              {g}
+            </button>
+          ))
+        }
+      </div>
+    )}
+  </div>
+
+  {
+    groups.map((group) => (
+      <div
+        class:list={["mt-8", multi && group !== groups[0] && "hidden"]}
+        data-pane={group}
+        role={multi ? "tabpanel" : undefined}
+      >
+        <div class="columns-1 gap-4 sm:columns-2 lg:columns-3">
+          {
+            byGroup(group).map((item) =>
+              item.type === "tour" ? (
+                <VirtualTourEmbed item={item} />
+              ) : item.type === "video" ? (
+                <VideoEmbed
+                  src={item.src}
+                  poster={item.poster}
+                  title={item.title}
+                />
+              ) : (
+                <figure class="mb-4 break-inside-avoid">
+                  <a
+                    href={item.src}
+                    data-lightbox
+                    data-lightbox-group={group}
+                    data-caption={item.title ?? ""}
+                    aria-label={item.title ?? "Abrir imagen en tamaño completo"}
+                    class="group block overflow-hidden rounded-xl border border-line bg-surface/40 transition-colors hover:border-glow/40"
+                  >
+                    <img
+                      src={item.src}
+                      alt={item.title ?? ""}
+                      loading="lazy"
+                      decoding="async"
+                      class="h-auto w-full transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </a>
+                  {item.title && (
+                    <figcaption class="mt-2.5 font-mono text-xs text-faint">
+                      {item.title}
+                    </figcaption>
+                  )}
+                </figure>
+              ),
+            )
+          }
+        </div>
+      </div>
+    ))
+  }
+
+  <Lightbox />
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>(
+    "#galeria [data-tab]",
+  );
+  const panes = document.querySelectorAll<HTMLElement>(
+    "#galeria [data-pane]",
+  );
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const group = tab.dataset.tab ?? "";
+
+      tabs.forEach((t) => {
+        const active = t === tab;
+        t.classList.toggle("is-active", active);
+        t.setAttribute("aria-selected", String(active));
+      });
+
+      panes.forEach((pane) => {
+        const shown = pane.dataset.pane === group;
+        pane.classList.toggle("hidden", !shown);
+      });
+    });
+  });
+
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-tour-launch]")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const embed = btn.closest<HTMLElement>("[data-tour-embed]");
+        const iframe = embed?.querySelector<HTMLIFrameElement>(
+          "[data-tour-iframe]",
+        );
+        const src = embed?.dataset.embedSrc;
+        if (iframe && src && !iframe.src) {
+          iframe.src = src;
+          btn.classList.add("opacity-0", "pointer-events-none");
+          btn.setAttribute("aria-hidden", "true");
+        }
+      });
+    });
+</script>

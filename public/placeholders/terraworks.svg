@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1422"/>
+      <stop offset="1" stop-color="#101722"/>
+    </linearGradient>
+    <radialGradient id="r" cx="0.5" cy="0.42" r="0.6">
+      <stop offset="0" stop-color="#00e5ff" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#00e5ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00e5ff"/>
+      <stop offset="1" stop-color="#ff6b2c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)"/>
+  <rect width="1200" height="675" fill="url(#r)"/>
+  <g fill="none" stroke="#1e2a3a" stroke-opacity="0.35">
+    <path d="M75 0 V675"/><path d="M225 0 V675"/><path d="M375 0 V675"/><path d="M525 0 V675"/><path d="M675 0 V675"/><path d="M825 0 V675"/><path d="M975 0 V675"/><path d="M1125 0 V675"/>
+  </g>
+  <g><path d="M0 40 H1200" stroke="#1e2a3a" stroke-opacity="0.5"/><path d="M0 200 H1200" stroke="#1e2a3a" stroke-opacity="0.5"/><path d="M0 360 H1200" stroke="#1e2a3a" stroke-opacity="0.5"/><path d="M0 520 H1200" stroke="#1e2a3a" stroke-opacity="0.5"/><path d="M0 680 H1200" stroke="#1e2a3a" stroke-opacity="0.5"/></g>
+  <rect x="90" y="90" width="40" height="40" rx="8" fill="none" stroke="#00e5ff" stroke-opacity="0.35" stroke-width="1.5"/>
+  <rect x="1070" y="545" width="40" height="40" rx="8" fill="none" stroke="#00e5ff" stroke-opacity="0.35" stroke-width="1.5"/>
+  <text x="600" y="352" fill="#00e5ff" font-family="monospace" font-size="170" font-weight="700" text-anchor="middle" opacity="0.92">TW</text>
+  <text x="600" y="412" fill="#93a1b3" font-family="monospace" font-size="20" letter-spacing="10" text-anchor="middle">TERRAWORKS</text>
+</svg>

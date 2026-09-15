@@ -1,0 +1,77 @@
+---
+import { getCollection } from "astro:content";
+import SectionHeading from "../ui/SectionHeading.astro";
+import ProjectCard from "../ui/ProjectCard.astro";
+
+const projects = (await getCollection("projects")).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+
+const filters = [
+  { id: "all", label: "Todos" },
+  { id: "development", label: "Desarrollo" },
+  { id: "3d", label: "Diseño 3D" },
+  { id: "engineering", label: "Ingeniería" },
+];
+---
+
+<section id="proyectos" class="mx-auto w-full max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-24">
+  <SectionHeading
+    kicker="02 · TRABAJOS DESTACADOS"
+    title="Proyectos"
+    description="Selección de trabajos que cruzan desarrollo de software, diseño 3D e ingeniería mecánica."
+  />
+
+  <div class="reveal mt-10 flex flex-wrap items-center gap-2" role="group" aria-label="Filtrar proyectos por disciplina">
+    {
+      filters.map((f, i) => (
+        <button
+          type="button"
+          data-filter={f.id}
+          aria-pressed={i === 0 ? "true" : "false"}
+          class:list={["filter-btn", i === 0 && "is-active"]}
+        >
+          {f.label}
+        </button>
+      ))
+    }
+  </div>
+
+  <div
+    id="project-grid"
+    class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+  >
+    {
+      projects.map((project) => (
+        <ProjectCard project={project} />
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>(
+    "#proyectos [data-filter]",
+  );
+  const cards = document.querySelectorAll<HTMLElement>(
+    "#project-grid > *",
+  );
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter ?? "all";
+
+      buttons.forEach((b) => {
+        const active = b === btn;
+        b.classList.toggle("is-active", active);
+        b.setAttribute("aria-pressed", String(active));
+      });
+
+      cards.forEach((card) => {
+        const list = card.dataset.disciplines?.split(",") ?? [];
+        const shown = filter === "all" || list.includes(filter);
+        card.classList.toggle("hidden", !shown);
+      });
+    });
+  });
+</script>

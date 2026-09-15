@@ -1,0 +1,144 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { DISCIPLINES, sortDisciplines } from "../../data/disciplines";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+
+const disciplines = sortDisciplines(data.disciplines);
+const href = `/proyectos/${project.slug}`;
+const isFeatured = data.featured;
+---
+
+<article
+  class="group reveal hover-lift relative flex h-full flex-col overflow-hidden rounded-xl border border-line bg-surface/60 hover:border-glow/30"
+  data-disciplines={data.disciplines.join(",")}
+>
+  <div class="relative aspect-[16/10] overflow-hidden">
+    <a href={href} class="block" tabindex="-1" aria-hidden="true">
+      <img
+        src={data.image}
+        alt=""
+        loading="lazy"
+        decoding="async"
+        width="1200"
+        height="675"
+        class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+      />
+    </a>
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-surface/80 via-transparent to-transparent"
+      aria-hidden="true"
+    ></div>
+    <div class="absolute left-3 top-3 flex gap-1.5">
+      {
+        disciplines.map((d) => (
+          <span
+            class:list={[
+              "rounded-full border px-2 py-0.5 font-mono text-[10px]",
+              DISCIPLINES[d].chip,
+            ]}
+          >
+            {DISCIPLINES[d].label}
+          </span>
+        ))
+      }
+    </div>
+    {isFeatured && (
+      <span
+        class="absolute right-3 top-3 rounded-full border border-line bg-ink/70 px-2 py-0.5 font-mono text-[10px] text-mute backdrop-blur"
+      >
+        caso de estudio
+      </span>
+    )}
+  </div>
+
+  <div class="flex flex-1 flex-col gap-2.5 p-5">
+    <div class="flex items-baseline justify-between gap-3">
+      <h3 class="font-display text-lg font-semibold tracking-tight">
+        <a
+          href={href}
+          class="transition-colors hover:text-glow"
+        >
+          {data.title}
+        </a>
+      </h3>
+      <span class="shrink-0 font-mono text-[11px] text-faint">{data.year}</span>
+    </div>
+
+    <p class="text-sm font-medium text-mute">{data.role}</p>
+    <p class="text-sm leading-relaxed text-faint">{data.summary}</p>
+
+    <ul class="mt-auto flex flex-wrap gap-1.5 pt-3">
+      {
+        data.tags.map((tag) => (
+          <li class="rounded-md border border-line-soft bg-surface/50 px-2 py-0.5 font-mono text-[11px] text-mute">
+            {tag}
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="flex items-center justify-between gap-3 pt-2">
+      {data.links && data.links.length > 0 ? (
+        <ul class="flex flex-wrap gap-3">
+          {
+            data.links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  class="inline-flex items-center gap-1 font-mono text-[11px] text-mute transition-colors hover:text-glow"
+                >
+                  {link.label}
+                  <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17 17 7" />
+                    <path d="M7 7h10v10" />
+                  </svg>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      ) : (
+        <span aria-hidden="true"></span>
+      )}
+
+      <a
+        href={href}
+        class="inline-flex items-center gap-1 font-mono text-[11px] text-faint transition-colors group-hover:text-glow"
+      >
+        ver caso
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14" />
+          <path d="m12 5 7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>

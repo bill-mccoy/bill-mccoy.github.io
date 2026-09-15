@@ -1,0 +1,57 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import { socials } from "../../data/socials";
+import { EMAIL } from "../../data/site";
+---
+
+<section id="contacto" class="mx-auto w-full max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-24">
+  <div class="reveal flex flex-col items-center rounded-2xl border border-line bg-surface/50 px-6 py-14 text-center sm:py-16">
+    <SectionHeading
+      align="center"
+      kicker="04 · CONTACTO"
+      title="¿Construimos algo juntos?"
+      description="Tengo disponibilidad para proyectos de software, visualización 3D y diseño mecánico. Si te interesa un perfil que cruza las tres cosas, escríbeme."
+    />
+
+    <a
+      href={`mailto:${EMAIL}`}
+      class="group press mt-8 inline-flex items-center gap-3 rounded-lg bg-glow px-6 py-3 font-mono text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
+    >
+      {EMAIL}
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14" />
+        <path d="m12 5 7 7-7 7" />
+      </svg>
+    </a>
+
+    <ul class="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+      {
+        socials
+          .filter((s) => s.href.startsWith("http") || s.href.startsWith("mailto"))
+          .map((s) => (
+            <li>
+              <a
+                href={s.href}
+                target={s.href.startsWith("http") ? "_blank" : undefined}
+                rel={s.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                class="group inline-flex items-baseline gap-1.5 text-sm text-mute transition-colors hover:text-glow"
+              >
+                <span class="font-mono text-xs text-faint transition-colors group-hover:text-glow/60">{s.label}</span>
+                <span>{s.handle}</span>
+              </a>
+            </li>
+          ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,100 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type GalleryItem = CollectionEntry<"projects">["data"]["gallery"];
+type Item = NonNullable<GalleryItem>[number];
+
+interface Props {
+  item: Item;
+}
+
+const { item } = Astro.props;
+
+const ratioClass =
+  item.ratio === "4/3"
+    ? "aspect-[4/3]"
+    : item.ratio === "square"
+      ? "aspect-square"
+      : "aspect-video";
+---
+
+<figure class="tour-embed mb-4 break-inside-avoid">
+  <div
+    class:list={[
+      "relative overflow-hidden rounded-xl border border-line bg-ink",
+      ratioClass,
+    ]}
+    data-tour-embed
+    data-embed-src={item.src}
+  >
+    <iframe
+      data-tour-iframe
+      src=""
+      class="absolute inset-0 h-full w-full"
+      title={item.title ?? "Tour virtual"}
+      loading="lazy"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; xr-spatial-tracking"
+      allowfullscreen
+    ></iframe>
+
+    <button
+      type="button"
+      data-tour-launch
+      class="absolute inset-0 flex flex-col items-center justify-center gap-4 bg-surface/40 transition-opacity duration-300"
+      aria-label={item.title ? `Abrir tour: ${item.title}` : "Abrir tour virtual"}
+    >
+      {item.poster && (
+        <img
+          src={item.poster}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          class="absolute inset-0 h-full w-full object-cover opacity-60"
+        />
+      )}
+      <span
+        class="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent"
+        aria-hidden="true"
+      ></span>
+      <span
+        class="relative grid size-14 place-items-center rounded-full border border-glow/40 bg-ink/70 backdrop-blur transition-transform group-hover:scale-105"
+        aria-hidden="true"
+      >
+        <svg
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="ml-0.5 text-glow"
+        >
+          <path d="M8 5.14v14l11-7-11-7z" />
+        </svg>
+      </span>
+      <span class="relative font-mono text-xs tracking-[0.2em] text-soft">
+        ABRIR TOUR
+      </span>
+    </button>
+  </div>
+
+  {item.title && (
+    <figcaption class="mt-2.5 flex items-center gap-2 font-mono text-xs text-faint">
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="text-glow/70"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="m16 8-5 3" />
+        <path d="M2 12a15.3 15.3 0 0 1 20 0" />
+      </svg>
+      {item.title}
+    </figcaption>
+  )}
+</figure>

@@ -1,0 +1,77 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import { pillars } from "../../data/pillars";
+
+const accentText = {
+  glow: "text-glow",
+  cad: "text-cad",
+  steel: "text-steel",
+} as const;
+
+const accentBar = {
+  glow: "bg-glow",
+  cad: "bg-cad",
+  steel: "bg-steel",
+} as const;
+---
+
+<section id="about" class="mx-auto w-full max-w-6xl scroll-mt-24 px-5 py-16 sm:px-8 sm:py-24">
+  <div class="grid gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+    <SectionHeading
+      kicker="01 · PERFIL"
+      title="Un perfil que cruza tres mundos"
+      description="No elijo entre código, modelado y taller: los combino. Mis proyectos parten de un problema real y terminan como aplicación, pieza o recorrido navegable."
+    />
+
+    <div class="space-y-8">
+      <p class="reveal leading-relaxed text-mute">
+        Soy ingeniero civil mecánico con foco en simulación y CAD/CAM, y
+        desarrollador de software por vocación. He construido bots y
+        aplicaciones desde la línea de comandos, modelado espacios que aún no
+        existen y sudado en el taller para que un monoplaza de Formula Student
+        salga a pista. Cada disciplina me hizo mejor en las otras.
+      </p>
+
+      <ul class="space-y-5">
+        {
+          pillars.map((p, i) => (
+            <li
+              class="reveal group flex gap-5"
+              style={`transition-delay: ${i * 90}ms`}
+            >
+              <div class="flex flex-col items-center gap-2">
+                <span
+                  class:list={[
+                    "grid size-10 shrink-0 place-items-center rounded-lg border border-line bg-surface/60 font-mono text-xs",
+                    accentText[p.accent],
+                  ]}
+                >
+                  {p.num}
+                </span>
+                <span
+                  class:list={[
+                    "hidden w-px flex-1 rounded bg-line min-h-6 sm:block",
+                    i === pillars.length - 1 && "opacity-0",
+                  ]}
+                  aria-hidden="true"
+                ></span>
+              </div>
+              <div class="pb-1">
+                <div class="flex items-center gap-2.5">
+                  <span
+                    class:list={["size-1.5 rounded-full", accentBar[p.accent]]}
+                    aria-hidden="true"
+                  ></span>
+                  <h3 class="font-display text-lg font-semibold tracking-tight">
+                    {p.title}
+                  </h3>
+                </div>
+                <p class="mt-1.5 text-sm leading-relaxed text-mute">{p.desc}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

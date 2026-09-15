@@ -1,14 +1,17 @@
 ---
 const nav = [
-  { label: "Inicio", href: "/#inicio" },
-  { label: "Proyectos", href: "/#proyectos" },
-  { label: "Open Source", href: "/#open-source" },
+  { label: "Inicio", href: "/#inicio", dataNav: "inicio" },
+  { label: "Proyectos", href: "/#proyectos", dataNav: "proyectos" },
+  { label: "Open Source", href: "/#open-source", dataNav: "open-source" },
   { label: "CV", href: "/cv" },
-  { label: "Contacto", href: "/#contacto" },
+  { label: "Contacto", href: "/#contacto", dataNav: "contacto" },
 ];
 ---
 
-<header class="glass sticky top-0 z-50 border-x-0 border-t-0">
+<header
+  id="site-header"
+  class="glass header sticky top-0 z-50 border-x-0 border-t-0"
+>
   <div
     class="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-5 sm:px-8"
   >
@@ -30,6 +33,7 @@ const nav = [
         nav.map((item) => (
           <a
             href={item.href}
+            data-nav={item.dataNav ?? undefined}
             class="rounded-md px-3 py-2 text-sm text-mute transition-colors hover:bg-surface-2 hover:text-soft"
           >
             {item.label}
@@ -40,7 +44,7 @@ const nav = [
 
     <button
       id="menu-toggle"
-      class="grid size-9 place-items-center rounded-md text-mute ring-1 ring-transparent transition-colors hover:bg-surface-2 hover:text-soft md:hidden"
+      class="press grid size-9 place-items-center rounded-md text-mute ring-1 ring-transparent transition-colors hover:bg-surface-2 hover:text-soft md:hidden"
       type="button"
       aria-expanded="false"
       aria-controls="mobile-menu"

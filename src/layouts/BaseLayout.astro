@@ -1,6 +1,7 @@
 ---
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
+import { ClientRouter } from "astro:transitions";
 import {
   SITE_TITLE,
   SITE_DESCRIPTION,
@@ -21,7 +22,11 @@ interface Props {
 const { title = SITE_TITLE, description = SITE_DESCRIPTION, image } =
   Astro.props;
 const pageTitle = title === SITE_TITLE ? SITE_TITLE : `${title} — Juan Cortes`;
-const ogImage = image ?? `${SITE_URL}/og/default.jpg`;
+const ogImage = image
+  ? image.startsWith("http")
+    ? image
+    : `${SITE_URL}${image}`
+  : `${SITE_URL}/og/default.jpg`;
 ---
 
 <!doctype html>
@@ -39,6 +44,8 @@ const ogImage = image ?? `${SITE_URL}/og/default.jpg`;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={new URL(Astro.url.pathname, SITE_URL).href} />
 
+    <ClientRouter />
+
     <meta property="og:type" content="website" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
@@ -52,6 +59,11 @@ const ogImage = image ?? `${SITE_URL}/og/default.jpg`;
     <meta name="twitter:image" content={ogImage} />
   </head>
   <body class="flex min-h-screen flex-col">
+    <div
+      id="scroll-progress"
+      class="scroll-progress fixed inset-x-0 top-0 z-[70] h-0.5 origin-left scale-x-0"
+      aria-hidden="true"
+    ></div>
     <Header />
     <main class="flex-1">
       <slot />
@@ -59,3 +71,68 @@ const ogImage = image ?? `${SITE_URL}/og/default.jpg`;
     <Footer />
   </body>
 </html>
+
+<script>
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)")
+    .matches;
+
+  const revealEls = () =>
+    document.querySelectorAll<HTMLElement>(".reveal");
+  const revealFully = () =>
+    revealEls().forEach((el) => el.classList.add("is-visible"));
+
+  if (!reduced && "IntersectionObserver" in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px" },
+    );
+    revealEls().forEach((el) => io.observe(el));
+  } else {
+    revealFully();
+  }
+
+  const bar = document.getElementById("scroll-progress");
+  const updateProgress = () => {
+    if (!bar) return;
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const ratio = max > 0 ? doc.scrollTop / max : 0;
+    bar.style.transform = `scaleX(${ratio})`;
+  };
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+
+  const header = document.getElementById("site-header");
+  const updateHeader = () =>
+    header?.classList.toggle("is-scrolled", window.scrollY > 8);
+  window.addEventListener("scroll", updateHeader, { passive: true });
+  updateHeader();
+
+  const links = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>("#site-header a[data-nav]"),
+  );
+  if (links.length > 0 && "IntersectionObserver" in window) {
+    const activeLink = (id: string) =>
+      links.find((l) => l.dataset.nav === id);
+    const ioSpy = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          links.forEach((l) => l.classList.remove("nav-active"));
+          activeLink(entry.target.id)?.classList.add("nav-active");
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+    );
+    document
+      .querySelectorAll<HTMLElement>("main section[id]")
+      .forEach((s) => ioSpy.observe(s));
+  }
+</script>

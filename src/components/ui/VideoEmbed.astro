@@ -1,0 +1,20 @@
+---
+interface Props {
+  src: string;
+  poster?: string;
+  title?: string;
+}
+
+const { src, poster, title } = Astro.props;
+---
+
+<video
+  controls
+  preload="none"
+  poster={poster}
+  playsinline
+  class="mb-4 aspect-video w-full break-inside-avoid rounded-xl border border-line bg-ink"
+  aria-label={title ?? "Video del proyecto"}
+>
+  <source src={src} type="video/mp4" />
+</video>
