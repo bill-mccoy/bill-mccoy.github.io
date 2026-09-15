@@ -1,6 +1,6 @@
 # 👋 Hola, soy Juan Cortés
 
-**Estudiante de Ingeniería Civil Mecánica**  
+**Estudiante de Ingeniería Mecánica**  
 Especializado en **simulación, CAD/CAM, servidores y Python**  
 
 <div align="center">

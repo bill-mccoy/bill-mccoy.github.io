@@ -9,7 +9,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     period: "PUCV",
-    role: "Ingeniería Civil Mecánica",
+    role: "Ingeniería Mecánica",
     org: "Pontificia Universidad Católica de Valparaíso",
     desc: "Formación orientada a simulación, diseño CAD/CAM y mecánica de sólidos, con trabajo de taller y proyectos multidisciplinarios.",
     tags: ["Simulación", "CAD/CAM", "Ingeniería de sólidos"],
