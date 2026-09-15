@@ -66,7 +66,7 @@ void main() {
   col += ORANGE * 0.08 * exp(-2.5 * length(p - vec2(-0.7, 0.15)));
 
   // camera sways with the cursor -> obvious mouse response
-  vec3 ro = vec3(pm * 1.25, 0.95 + pm.y * 0.4, 4.4);
+  vec3 ro = vec3(pm.x * 1.25, 0.95 + pm.y * 0.4, 4.4);
   vec3 rd = normalize(vec3(p + pm * 0.5, pm.y * 0.35 - 2.0));
 
   float fog = 1.0;
@@ -85,18 +85,18 @@ void main() {
       float depthFade = exp(-max(0.0, ro.z - hit.z) * 0.24);
       float sideFade = exp(-abs(hit.x) * 0.45);
       float hFade = smoothstep(-1.4, -0.3, hit.y); // fades out below screen bottom
-      col += STEEL * (line * 0.42 * depthFade * sideFade * hFade);
-      col += CYAN * (lx * lz * 0.5 * depthFade * sideFade * hFade); // nodes
+      col += STEEL * (line * 0.6 * depthFade * sideFade * hFade);
+      col += CYAN * (lx * lz * 0.9 * depthFade * sideFade * hFade); // nodes
       // soft center axis line (orange)
       float axis = 1.0 - smoothstep(0.0, dw.y * 3.0, min(abs(hit.x) * 8.0, 1.0));
-      col += ORANGE * (axis * 0.16 * depthFade * hFade);
+      col += ORANGE * (axis * 0.3 * depthFade * hFade);
     }
   }
 
   // ---- floating wireframe cube ----
   {
     vec3 c = vec3(0.95, 0.42, 0.15);
-    vec3 q = p - c;
+    vec3 q = vec3(p, 0.0) - c;
     q = rotZ(sin(t * 0.45) * 0.35) * q;
     q = rotY(t * 0.6) * q;
     float h = 0.36;
@@ -115,15 +115,15 @@ void main() {
     d = min(d, sdSegment(q, vec3(-h, h, -h), vec3(-h, h, h), 0.008));
     d = min(d, sdSegment(q, vec3(h, h, -h), vec3(h, h, h), 0.008));
     float glow = edgeGlow(d);
-    float depthD = exp(-length(p - c) * 1.1);
-    col += CYAN * glow * (0.75 * depthD);
-    col += CYAN * 0.08 * exp(-length(q) * 1.6); // soft halo around shape
+    float depthD = exp(-length(q) * 1.1);
+    col += CYAN * glow * (1.0 * depthD);
+    col += CYAN * 0.14 * exp(-length(q) * 1.6); // soft halo around shape
   }
 
   // ---- floating wireframe octahedron ----
   {
     vec3 c = vec3(-1.05, 1.2, -0.25);
-    vec3 q = p - c;
+    vec3 q = vec3(p, 0.0) - c;
     q = rotX(t * 0.4 + pm.x) * q;
     q = rotY(t * 0.5) * q;
     float r = 0.62;
@@ -147,22 +147,22 @@ void main() {
     d = min(d, sdSegment(q, yY, Z, 0.008));
     d = min(d, sdSegment(q, yY, zZ, 0.008));
     float glow = edgeGlow(d);
-    float depthD = exp(-length(p - c) * 1.1);
-    col += ORANGE * glow * (0.7 * depthD);
-    col += ORANGE * 0.07 * exp(-length(q) * 1.6);
+    float depthD = exp(-length(q) * 1.1);
+    col += ORANGE * glow * (0.95 * depthD);
+    col += ORANGE * 0.12 * exp(-length(q) * 1.6);
   }
 
   // ---- tilted neon ring ----
   {
     vec3 c = vec3(0.35, -0.55, 1.1);
-    vec3 q = p - c;
+    vec3 q = vec3(p, 0.0) - c;
     q = rotX(1.05) * q;
     q = rotZ(sin(t * 0.3) * 0.12) * q;
     float d = sdTorus(q, vec2(0.62, 0.028));
     float ring = exp(-abs(d) * 160.0);
-    float depthD = exp(-length(p - c) * 1.4);
-    col += CYAN * ring * (0.65 * depthD);
-    col += CYAN_S * 0.12 * exp(-abs(d) * 60.0) * depthD;
+    float depthD = exp(-length(q) * 1.4);
+    col += CYAN * ring * (0.9 * depthD);
+    col += CYAN_S * 0.18 * exp(-abs(d) * 60.0) * depthD;
   }
 
   // ---- floating dust with per-layer parallax ----
@@ -179,7 +179,7 @@ void main() {
       float dotGlow = smoothstep(0.07, 0.0, length(f - pt));
       float pulse = 0.6 + 0.4 * sin(t * (0.8 + h * 1.6) + h * 24.0);
       vec3 dust = mix(CYAN, ORANGE, step(0.7, h));
-      col += dust * dotGlow * pulse * 0.45;
+      col += dust * dotGlow * pulse * 0.6;
     }
   }
 
@@ -200,8 +200,9 @@ void main() {
   // vignette
   col *= 1.0 - 0.55 * smoothstep(0.7, 1.7, length(p));
 
-  // alpha: stronger towards the bottom so text stays readable on top
-  float a = clamp(0.32 + 0.68 * smoothstep(0.08, -0.75, p.y), 0.0, 1.0);
+  // alpha: strong near the bottom where the grid lives, faint near the top
+  // so the headline stays readable
+  float a = clamp(0.4 + 0.6 * smoothstep(-0.4, 0.5, p.y), 0.0, 1.0);
 
   outColor = vec4(col * a, a);
 }
