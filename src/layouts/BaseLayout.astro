@@ -149,10 +149,11 @@ const ogImage = image
       (entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          links.forEach((l) => l.classList.remove("nav-active"));
           const active = activeLink(entry.target.id);
-          active?.classList.add("nav-active");
-          positionIndicator(active ?? null);
+          if (!active) continue;
+          links.forEach((l) => l.classList.remove("nav-active"));
+          active.classList.add("nav-active");
+          positionIndicator(active);
         }
       },
       { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
