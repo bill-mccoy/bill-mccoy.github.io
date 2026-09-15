@@ -84,7 +84,7 @@ void main() {
       float line = clamp(lx + lz, 0.0, 1.0);
       float depthFade = exp(-max(0.0, ro.z - hit.z) * 0.24);
       float sideFade = exp(-abs(hit.x) * 0.45);
-      float hFade = smoothstep(-1.4, -0.3, hit.y); // fades out below screen bottom
+      float hFade = smoothstep(-1.8, -0.05, hit.y); // fades out near the very bottom
       col += STEEL * (line * 0.6 * depthFade * sideFade * hFade);
       col += CYAN * (lx * lz * 0.9 * depthFade * sideFade * hFade); // nodes
       // soft center axis line (orange)
@@ -183,13 +183,35 @@ void main() {
     }
   }
 
-  // ---- cursor halo (direct, in screen space) ----
+  // ---- glowing orbs orbiting the scene ----
+  {
+    float ax = u_res.x / u_res.y;
+    float reach = min(0.9, ax * 0.5);
+    for (int k = 0; k < 4; k++) {
+      float ph = t * (0.42 + 0.12 * float(k)) + float(k) * 1.9;
+      float depthZ = sin(ph * 0.9);
+      float lit = 0.5 + 0.5 * depthZ;
+      vec2 oc = vec2(
+        cos(ph) * reach * (0.5 + 0.12 * float(k)),
+        sin(ph) * (0.4 + 0.05 * float(k))
+      ) - pm * 0.12;
+      float d = length(p - oc);
+      float s = 1.0 + 0.6 * depthZ;
+      float halo = exp(-d * 5.5 * s);
+      float core = exp(-d * 34.0 * s);
+      vec3 tint = mix(CYAN, ORANGE, step(0.5, fract(0.618 * float(k))));
+      col += tint * halo * (0.12 + 0.4 * lit);
+      col += tint * core * (0.08 + 0.6 * lit);
+    }
+  }
+
+  // ---- ambient light that follows the cursor (no hard ball) ----
   {
     vec2 cp = vec2(u_mouse.x - 0.5, 0.5 - u_mouse.y) *
               vec2(u_res.x / u_res.y, 1.0);
     float md = length(p - cp);
-    col += CYAN * 0.4 * exp(-3.5 * md);
-    col += ORANGE * 0.14 * exp(-8.0 * md);
+    col += CYAN * 0.16 * exp(-2.6 * md);
+    col += CYAN_S * 0.1 * exp(-1.4 * md);
   }
 
   // ---- atmosphere ----
@@ -290,7 +312,10 @@ export function startHeroBackdrop(
     const w = canvas.clientWidth;
     const h = canvas.clientHeight;
     if (!w || !h) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const dpr = Math.min(
+      window.devicePixelRatio || 1,
+      window.innerWidth < 768 ? 1.25 : 1.5,
+    );
     const pw = Math.max(1, Math.floor(w * dpr));
     const ph = Math.max(1, Math.floor(h * dpr));
     if (canvas.width !== pw || canvas.height !== ph) {
