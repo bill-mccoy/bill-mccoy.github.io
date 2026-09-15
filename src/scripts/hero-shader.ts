@@ -24,35 +24,44 @@ void main() {
   vec2 pm = u_mouse - 0.5;
   float t = u_time;
 
+  // cursor position in aspect-corrected coordinates
+  vec2 cp = vec2(u_mouse.x - 0.5, 0.5 - u_mouse.y) * vec2(u_res.x / u_res.y, 1.0);
+  float md = length(p - cp);
+
   vec3 col = vec3(0.0);
 
   // ambient glow
   col += vec3(0.0, 0.9, 1.0) * 0.055 * exp(-2.2 * length(p - vec2(0.55, -0.25)));
   col += vec3(1.0, 0.42, 0.17) * 0.03 * exp(-2.2 * length(p - vec2(-0.65, 0.5)));
 
-  // scrolling blueprint grid
+  // glow and line boost that follows the cursor
+  float cursorNear = 1.0 + 1.4 * exp(-4.0 * md);
+  col += vec3(0.0, 0.9, 1.0) * 0.18 * exp(-3.0 * md);
+  col += vec3(1.0, 0.42, 0.17) * 0.07 * exp(-6.0 * md);
+
+  // scrolling blueprint grid (parallax with cursor)
   {
     float s = t * 0.06;
-    vec2 gp = p * 1.7;
+    vec2 gp = p * 1.7 - pm * 0.18;
     vec2 g = abs(fract(gp + vec2(s * 0.8, s)) - 0.5);
     vec2 d = fwidth(gp);
     vec2 l = 1.0 - abs(g * 2.0 - 1.0);
     float line = step(d.x, l.x) + step(d.y, l.y);
     float breathe = 0.7 + 0.3 * sin(t * 0.5);
-    col += vec3(0.44, 0.56, 0.66) * line * (0.17 * breathe);
+    col += vec3(0.44, 0.56, 0.66) * line * (0.17 * breathe * cursorNear);
   }
 
-  // fine cyan grid with mouse parallax
+  // fine cyan grid with stronger mouse parallax
   {
-    vec2 gp = p * 4.0 - pm * 0.06;
+    vec2 gp = p * 4.0 - pm * 0.45;
     vec2 g = abs(fract(gp - t * vec2(0.012, 0.02)) - 0.5);
     vec2 d = fwidth(gp);
     vec2 l = 1.0 - abs(g * 2.0 - 1.0);
     float line = step(d.x, l.x) + step(d.y, l.y);
-    col += vec3(0.0, 0.9, 1.0) * line * 0.05;
+    col += vec3(0.0, 0.9, 1.0) * line * 0.06;
   }
 
-  // drifting particles
+  // drifting particles (brighter near the cursor)
   {
     float cells = 11.0;
     vec2 c = floor(p * cells);
@@ -63,7 +72,8 @@ void main() {
     float pt = smoothstep(0.06, 0.0, dist);
     float pulse = 0.5 + 0.5 * sin(t * (0.6 + h * 1.8) + h * 40.0);
     vec3 cPart = mix(vec3(0.0, 0.9, 1.0), vec3(1.0, 0.42, 0.17), step(0.62, h));
-    col += cPart * pt * pulse * 0.4;
+    float nearCursor = 1.0 + 1.5 * exp(-5.0 * md);
+    col += cPart * pt * pulse * (0.4 * nearCursor);
   }
 
   // scanline sweep

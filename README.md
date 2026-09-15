@@ -1,4 +1,4 @@
-# 👋 Hola, soy Juan Cortes
+# 👋 Hola, soy Juan Cortés
 
 **Estudiante de Ingeniería Civil Mecánica**  
 Especializado en **simulación, CAD/CAM, servidores y Python**  

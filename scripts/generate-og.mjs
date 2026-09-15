@@ -44,7 +44,7 @@ const svg = `
   </g>
   <rect x="90" y="90" width="46" height="46" rx="10" fill="#0a0f1a" stroke="url(#grad)" stroke-width="2"/>
   <text x="113" y="123" fill="url(#grad)" font-family="monospace" font-size="26" font-weight="700" text-anchor="middle">JC</text>
-  <text x="620" y="300" fill="#e6ebf2" font-family="'Trebuchet MS', sans-serif" font-size="72" font-weight="700" text-anchor="middle">Juan Cortes</text>
+  <text x="620" y="300" fill="#e6ebf2" font-family="'Trebuchet MS', sans-serif" font-size="72" font-weight="700" text-anchor="middle">Juan Cortés</text>
   <text x="620" y="352" fill="#93a1b3" font-family="monospace" font-size="26" letter-spacing="10" text-anchor="middle">SOFTWARE × 3D × ENGINEERING</text>
   <text x="620" y="540" fill="#5c6b80" font-family="monospace" font-size="20" letter-spacing="3" text-anchor="middle">${SITE}</text>
 </svg>`;
