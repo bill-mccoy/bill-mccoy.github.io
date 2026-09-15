@@ -1,5 +1,6 @@
 ---
 import { AUTHOR, AUTHOR_ROLE, CTA_PRIMARY, CTA_PRIMARY_HREF, CTA_SECONDARY, CTA_SECONDARY_HREF } from "../../data/site";
+import HeroBackdrop from "../ui/HeroBackdrop.astro";
 
 const stack = [
   "Python",
@@ -10,7 +11,7 @@ const stack = [
   "ChatGPT API",
   "Discord.js / py",
   "MySQL",
-  "SolidWorks",
+  "Autodesk Inventor",
 ];
 ---
 
@@ -19,6 +20,7 @@ const stack = [
     class="bg-grid pointer-events-none absolute inset-0 -z-10"
     aria-hidden="true"
   ></div>
+  <HeroBackdrop />
 
   <div
     class="mx-auto flex w-full max-w-6xl flex-col items-center px-5 pb-20 pt-24 text-center sm:px-8 sm:pt-32 lg:pb-28 lg:pt-40"

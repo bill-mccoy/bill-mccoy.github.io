@@ -2,6 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Hero from "../components/sections/Hero.astro";
 import About from "../components/sections/About.astro";
+import Experience from "../components/sections/Experience.astro";
 import Projects from "../components/sections/Projects.astro";
 import OpenSource from "../components/sections/OpenSource.astro";
 import Contact from "../components/sections/Contact.astro";
@@ -11,6 +12,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../data/site";
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <Hero />
   <About />
+  <Experience />
   <Projects />
   <OpenSource />
   <Contact />

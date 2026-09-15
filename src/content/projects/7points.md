@@ -4,7 +4,7 @@ org: "Grupo 7Points"
 year: "2023 — 2025"
 role: "Diseño · Desarrollo · Construcción"
 disciplines: ["engineering", "3d"]
-tags: ["SolidWorks", "FSAE", "Composites", "CAD/CAM"]
+tags: ["Autodesk Inventor", "FSAE", "Composites", "CAD/CAM"]
 summary: "Diseño, desarrollo y construcción de un buggy y un monoplaza para Formula Student. Del CAD al taller, pieza por pieza."
 image: "/placeholders/7points.svg"
 featured: true

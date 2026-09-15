@@ -1,0 +1,15 @@
+---
+---
+
+<div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+  <canvas id="hero-backdrop" class="block h-full w-full"></canvas>
+</div>
+
+<script>
+  import { startHeroBackdrop } from "../../scripts/hero-shader";
+
+  const canvas = document.getElementById("hero-backdrop");
+  if (canvas instanceof HTMLCanvasElement) {
+    startHeroBackdrop(canvas);
+  }
+</script>
