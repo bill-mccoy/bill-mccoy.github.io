@@ -8,6 +8,13 @@ export interface Experience {
 
 export const experiences: Experience[] = [
   {
+    period: "2024 — actualidad",
+    role: "Diseñador 3D · Desarrollador de tours virtuales",
+    org: "TerraWorks",
+    desc: "Modelado 3D de interiores y desarrollo de tours virtuales inmersivos: del espacio diseñado en Blender al visor navegable en el navegador.",
+    tags: ["Blender", "krpano", "Revit", "AutoCAD"],
+  },
+  {
     period: "PUCV",
     role: "Ingeniería Mecánica",
     org: "Pontificia Universidad Católica de Valparaíso",
@@ -20,12 +27,5 @@ export const experiences: Experience[] = [
     org: "Pontificia Universidad Católica de Valparaíso",
     desc: "Docencia y apoyo en taller de dibujo técnico: normalización, vistas, cortes y planimetría de piezas mecánicas entregada a las generaciones siguientes.",
     tags: ["Dibujo técnico", "Planimetría", "Normalización"],
-  },
-  {
-    period: "Home Lab",
-    role: "Administración de infraestructura y servidores",
-    org: "Proyecto personal",
-    desc: "Virtualización con Proxmox, firewall/router con pfSense y hosting de aplicaciones y servicios propios, incluyendo configuración de redes, DNS, backups y contenedores.",
-    tags: ["Proxmox", "pfSense", "Hosting", "Linux", "Redes"],
   },
 ];
