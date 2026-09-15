@@ -21,4 +21,11 @@ export const experiences: Experience[] = [
     desc: "Docencia y apoyo en taller de dibujo técnico: normalización, vistas, cortes y planimetría de piezas mecánicas entregada a las generaciones siguientes.",
     tags: ["Dibujo técnico", "Planimetría", "Normalización"],
   },
+  {
+    period: "Home Lab",
+    role: "Administración de infraestructura y servidores",
+    org: "Proyecto personal",
+    desc: "Virtualización con Proxmox, firewall/router con pfSense y hosting de aplicaciones y servicios propios, incluyendo configuración de redes, DNS, backups y contenedores.",
+    tags: ["Proxmox", "pfSense", "Hosting", "Linux", "Redes"],
+  },
 ];
