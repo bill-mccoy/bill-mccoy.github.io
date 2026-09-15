@@ -10,7 +10,7 @@ Especializado en **simulación, CAD/CAM, servidores y Python**
 ## 💼 Habilidades y Tecnologías
 
 <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" />
-<img src="https://img.shields.io/badge/Blender-E57426?style=for-the-badge&logo=blender&logoColor=white" />
+<img src="https://img.shields.io/badge/DJI_360-F3C200?style=for-the-badge&logo=dji&logoColor=white" />
 <img src="https://img.shields.io/badge/Autodesk_Inv-1791FC?style=for-the-badge&logo=autodesk&logoColor=white" />
 <img src="https://img.shields.io/badge/Revit-999999?style=for-the-badge&logo=autodesk&logoColor=white" />
 <img src="https://img.shields.io/badge/AutoCAD-FC2C03?style=for-the-badge&logo=autodesk&logoColor=white" />
@@ -31,8 +31,8 @@ Tecnologías: Python, Discord Bot, MySQL
 
 ### 🌱 Terraworks
 [![Terraworks](https://img.shields.io/badge/Organización-Terraworks-green?style=for-the-badge)](https://github.com/bill-mccoy)  
-Organización de **diseño 3D de interiores y visualización**.  
-Tecnologías: Blender, Revit, AutoCAD, krpano
+Organización de **tours virtuales 360 y parcelación**.  
+Tecnologías: DJI 360, krpano, Photoshop, Inkscape, Google Earth, cPanel
 
 ---
 

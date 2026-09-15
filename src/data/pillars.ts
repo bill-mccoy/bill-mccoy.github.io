@@ -15,7 +15,7 @@ export const pillars: Pillar[] = [
   {
     num: "02",
     title: "Diseño 3D",
-    desc: "Modelado, render y tours virtuales inmersivos con Blender, Revit y krpano. Visualización de espacios que nunca existieron.",
+    desc: "Tours virtuales 360 de parcelaciones: captura con dron DJI, edición en Photoshop, Inkscape y Google Earth, y tours krpano integrados a Terraplan.",
     accent: "cad",
   },
   {

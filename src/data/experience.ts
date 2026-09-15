@@ -11,8 +11,8 @@ export const experiences: Experience[] = [
     period: "2024 — actualidad",
     role: "Diseñador 3D · Desarrollador de tours virtuales",
     org: "TerraWorks",
-    desc: "Modelado 3D de interiores y desarrollo de tours virtuales inmersivos: del espacio diseñado en Blender al visor navegable en el navegador.",
-    tags: ["Blender", "krpano", "Revit", "AutoCAD"],
+    desc: "Tours virtuales 360 para proyectos de parcelación: captura aérea con dron DJI, planimetría procesada en Inkscape, Photoshop y Google Earth, tours krpano en XML/HTML/CSS integrados a Terraplan y publicación con cPanel.",
+    tags: ["DJI 360", "krpano", "Photoshop", "Inkscape", "Google Earth", "cPanel"],
   },
   {
     period: "PUCV",
