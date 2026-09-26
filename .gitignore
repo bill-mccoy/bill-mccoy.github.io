@@ -19,3 +19,5 @@ pnpm-debug.log*
 # editor
 .vscode/
 .idea/
+.omo/run-continuation/ses_f20a4b775ffeWbb5BAAdURciye.json
+/.omo
