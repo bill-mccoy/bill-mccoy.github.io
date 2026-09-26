@@ -57,6 +57,14 @@ const lightboxId = "lightbox";
 
     let list: HTMLAnchorElement[] = [];
     let index = 0;
+    let lastTrigger: HTMLElement | null = null;
+
+    const focusables = () =>
+      Array.from(
+        root.querySelectorAll<HTMLElement>(
+          "[data-lb-close], [data-lb-prev], [data-lb-next]",
+        ),
+      );
 
     const render = () => {
       const current = list[index];
@@ -73,12 +81,14 @@ const lightboxId = "lightbox";
       root.classList.remove("hidden");
       document.body.style.overflow = "hidden";
       render();
+      root.querySelector<HTMLElement>("[data-lb-close]")?.focus();
     };
 
     const close = () => {
       root.classList.add("hidden");
       document.body.style.overflow = "";
       if (img) img.src = "";
+      lastTrigger?.focus();
     };
 
     const step = (dir: number) => {
@@ -98,6 +108,7 @@ const lightboxId = "lightbox";
             ),
           );
           index = list.indexOf(trigger);
+          lastTrigger = trigger;
           open();
         });
       });
@@ -120,6 +131,19 @@ const lightboxId = "lightbox";
       if (e.key === "Escape") close();
       if (e.key === "ArrowLeft") step(-1);
       if (e.key === "ArrowRight") step(1);
+      if (e.key === "Tab") {
+        const items = focusables();
+        if (items.length === 0) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
     });
   }
 </script>

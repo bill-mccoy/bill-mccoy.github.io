@@ -2,21 +2,37 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="CV">
+<BaseLayout title="CV" noindex>
   <section class="mx-auto flex w-full max-w-6xl flex-col items-center px-5 py-24 text-center sm:px-8 sm:py-32">
     <p class="mb-3 font-mono text-xs text-glow">CURRICULUM VITAE</p>
     <h1 class="font-display text-4xl font-bold tracking-tight sm:text-5xl">
-      Mi currículum, próximamente
+      Currículum
     </h1>
     <p class="mt-5 max-w-md text-mute">
-      Esta página estará lista en la Fase 7 del roadmap: versión web
-      imprimible con experiencia, habilidades y enlaces verificados.
+      La versión web de mi currículum aún no está publicada. Mientras tanto,
+      puedes ver mi experiencia y proyectos en
+      <a
+        href="https://www.linkedin.com/in/juancortesgutie/"
+        target="_blank"
+        rel="noreferrer noopener"
+        class="text-glow underline underline-offset-4 transition-colors hover:text-glowe"
+      >LinkedIn</a
+      >
+      o recorrer los proyectos de esta página.
     </p>
-    <a
-      href="/#inicio"
-      class="press mt-10 inline-flex items-center gap-2 rounded-lg border border-line bg-surface/60 px-6 py-3 text-sm font-semibold text-soft transition hover:-translate-y-0.5 hover:border-glow/50 hover:text-glow"
-    >
-      Volver al inicio
-    </a>
+    <div class="mt-10 flex flex-col items-center gap-3 sm:flex-row">
+      <a
+        href="/#proyectos"
+        class="press inline-flex items-center gap-2 rounded-lg bg-glow px-6 py-3 text-sm font-semibold text-ink transition-transform hover:-translate-y-0.5"
+      >
+        Ver proyectos
+      </a>
+      <a
+        href="/#inicio"
+        class="press inline-flex items-center gap-2 rounded-lg border border-line bg-surface/60 px-6 py-3 text-sm font-semibold text-soft transition hover:-translate-y-0.5 hover:border-glow/50 hover:text-glow"
+      >
+        Volver al inicio
+      </a>
+    </div>
   </section>
 </BaseLayout>

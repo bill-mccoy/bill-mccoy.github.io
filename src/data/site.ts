@@ -7,5 +7,5 @@ export const AUTHOR_ROLE =
   "Ingeniero mecánico · Desarrollador de software · Diseñador 3D";
 export const CTA_PRIMARY = "Ver proyectos";
 export const CTA_PRIMARY_HREF = "/#proyectos";
-export const CTA_SECONDARY = "Descargar CV";
+export const CTA_SECONDARY = "Ver CV";
 export const CTA_SECONDARY_HREF = "/cv";

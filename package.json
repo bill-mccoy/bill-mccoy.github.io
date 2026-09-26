@@ -10,6 +10,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
+    "test": "npm run build && node scripts/check-links.mjs",
     "assets": "node scripts/optimize-assets.mjs",
     "og": "node scripts/generate-og.mjs"
   },

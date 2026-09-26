@@ -16,7 +16,7 @@
   --color-line-soft: #16202e;
   --color-soft: #e6ebf2;
   --color-mute: #93a1b3;
-  --color-faint: #5c6b80;
+  --color-faint: #8498b0;
   --color-glow: #00e5ff;
   --color-glowe: #38e8ff;
   --color-cad: #ff6b2c;
@@ -70,7 +70,8 @@
 
 @layer components {
   .filter-btn {
-    @apply cursor-pointer rounded-full border border-line bg-surface/50 px-4 py-1.5 font-mono text-xs text-mute transition active:scale-[0.97];
+    @apply cursor-pointer rounded-full border border-line bg-surface/50 px-4 py-2.5 font-mono text-xs text-mute transition active:scale-[0.97];
+    min-height: 44px;
   }
   .filter-btn:hover {
     @apply border-line-soft text-soft;
